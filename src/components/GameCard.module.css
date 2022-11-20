@@ -1,0 +1,19 @@
+.cardWrapper {
+  position: relative;
+  height: 230px;
+  width: 230px;
+  border-radius: 8px;
+  background-color: brown;
+  line-height: 230px;
+  text-align: center;
+}
+
+.cardWrapper:hover {
+  cursor: pointer;
+}
+
+.heroImg {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+}
