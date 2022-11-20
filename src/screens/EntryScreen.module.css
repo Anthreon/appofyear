@@ -31,3 +31,36 @@
 .newGameButton:hover {
   opacity: 0.7;
 }
+
+.musicButton {
+  position: absolute;
+
+  height: 30px;
+  border-radius: 8px;
+  border: none;
+  background-color: darksalmon;
+  font-weight: 600;
+  cursor: pointer;
+  left: 25px;
+  top: 25px;
+  padding: 8px;
+}
+
+.musicButton:hover {
+  opacity: 0.7;
+}
+
+#progressBarWrapper {
+  width: 400px;
+  height: 30px;
+  position: absolute;
+  top: 60px;
+  border-radius: 8px;
+  background-color: gainsboro;
+  border: solid 1px;
+}
+
+#progressBarStatus {
+  background-color: green;
+  border-radius: 8px;
+}

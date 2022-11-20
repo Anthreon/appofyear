@@ -18,9 +18,74 @@ export interface Card {
   img: string;
 }
 
+const audio: HTMLAudioElement = new Audio(
+  require("../assets/music/BestMusic.mp3")
+);
+audio.addEventListener("loadeddata", () => {
+  let duration = audio.duration;
+
+  console.log(duration);
+
+  // The duration variable now holds the duration (in seconds) of the audio clip
+});
+
+let progressBarWidth = 400;
+
+function startInterval() {
+  const progressBar = document.getElementById("progressBarStatus");
+  console.log(progressBar);
+
+  const interval = setInterval(
+    () => {
+      progressBar.style.width = `${progressBarWidth}px`;
+      if (progressBarWidth < 300) {
+        progressBar.style.backgroundImage =
+          "linear-gradient(to right top, #25d644, #45d43c, #59d235, #69cf2e, #77cd28)";
+      }
+      if (progressBarWidth < 200) {
+        progressBar.style.backgroundImage =
+          "linear-gradient(to right top, #b9a446, #b4ac38, #abb42a, #9ebd1b, #8cc60a)";
+      }
+      if (progressBarWidth < 100) {
+        progressBar.style.backgroundImage =
+          "linear-gradient(to right top, #d3d223, #dfb206, #e4910f, #e17022, #d84f32)";
+      }
+      progressBarWidth -= 4;
+    },
+    794,
+    64
+  );
+}
+
 const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
   const [gameArray, setGameArray] = useState<Card[]>([]);
   const [wonGame, setWonGame] = useState<string>("");
+  const [audioPlaying, setAudioPlaying] = useState<boolean>(false);
+  const [gameOver, setGameOver] = useState<boolean>(false);
+
+  const timeExpiredGameOver = () => {
+    setTimeout(() => {
+      if (!wonGame) {
+        setGameOver(true);
+      }
+    }, 79464);
+  };
+
+  const playMusic = () => {
+    audio.play();
+    timeExpiredGameOver();
+    startInterval();
+    setAudioPlaying(true);
+  };
+
+  const stopMusic = () => {
+    audio.pause();
+    setAudioPlaying(false);
+  };
+
+  useEffect(() => {
+    console.log("uuu");
+  }, [progressBarWidth]);
 
   useEffect(() => {
     winningCondition.subscribe((winningValue) => {
@@ -37,11 +102,23 @@ const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
     });
   }, []);
 
-  return (
+  const normalState = (
     <div>
       <div className={Styles.wrapper}>
+        <button
+          className={Styles.musicButton}
+          onClick={audioPlaying ? stopMusic : playMusic}
+        >
+          Play Game
+        </button>
         <div>
           <h1 className={Styles.title}>{title + " " + wonGame} </h1>
+        </div>
+        <div id={Styles.progressBarWrapper}>
+          <div
+            style={{ backgroundColor: "green", borderRadius: "8px" }}
+            id="progressBarStatus"
+          ></div>
         </div>
         {wonGame ? (
           <div>
@@ -70,6 +147,18 @@ const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
           );
         })}
       </main>
+    </div>
+  );
+
+  return (
+    <div>
+      {gameOver ? (
+        <div>
+          <h1>You have lost, watch LOTR films to get better</h1>
+        </div>
+      ) : (
+        normalState
+      )}
     </div>
   );
 };
