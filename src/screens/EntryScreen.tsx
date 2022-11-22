@@ -84,10 +84,6 @@ const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
   };
 
   useEffect(() => {
-    console.log("uuu");
-  }, [progressBarWidth]);
-
-  useEffect(() => {
     winningCondition.subscribe((winningValue) => {
       if (winningValue) {
         setWonGame("You Have Won");
