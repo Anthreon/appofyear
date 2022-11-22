@@ -1,0 +1,66 @@
+@font-face {
+  font-family: "Lotr";
+  src: local("Lotr"), url("../assets/fonts/newFont.TTF") format("truetype");
+  font-weight: bold;
+}
+
+.videoWrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.video {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+}
+
+.soundController {
+  top: 40px;
+  width: 150px;
+  height: 150px;
+  color: black;
+  filter: invert(55%) sepia(46%) saturate(565%) hue-rotate(349deg)
+    brightness(84%) contrast(97%);
+  position: absolute;
+  z-index: 50;
+}
+
+.soundController:hover {
+  cursor: pointer;
+}
+
+.musicPlaying {
+  filter: invert(55%) sepia(46%) saturate(565%) hue-rotate(349deg)
+    brightness(84%) contrast(97%);
+}
+
+.musicStopped {
+  filter: invert(26%) sepia(98%) saturate(2851%) hue-rotate(357deg)
+    brightness(94%) contrast(90%);
+}
+
+.menuWrapper {
+  font-family: "Lotr";
+  height: auto;
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+  text-align: center;
+
+  border-radius: 16px;
+}
+
+.startGame {
+  z-index: 150;
+  text-decoration: none;
+  color: rgb(234, 225, 225);
+}
+
+.startGame:hover {
+  color: yellow;
+  cursor: pointer;
+}
