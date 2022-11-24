@@ -69,9 +69,14 @@ const EntryScreen: FC<EntryScreenProps> = () => {
   const [wonGame, setWonGame] = useState<string>("");
   const [audioPlaying, setAudioPlaying] = useState<boolean>(false);
   const [gameOver, setGameOver] = useState<boolean>(false);
+  const [startGameClicked, setStartGameClicked] = useState<boolean>(false);
 
   const timeExpiredGameOver = () => {
-    setTimeout(() => {
+    const timeout = setTimeout(() => {
+      if (wonGame) {
+        clearTimeout(timeout);
+        return;
+      }
       if (!wonGame) {
         stopMusic();
         setGameOver(true);
@@ -80,6 +85,7 @@ const EntryScreen: FC<EntryScreenProps> = () => {
   };
 
   const playMusic = () => {
+    setStartGameClicked(true);
     audio.currentTime = 0;
     audio.play();
     timeExpiredGameOver();
@@ -121,7 +127,7 @@ const EntryScreen: FC<EntryScreenProps> = () => {
     <div className={Styles.mainContent}>
       <img className={Styles.gameBackground} src={gameScreenBackground}></img>
       <div className={Styles.wrapper}>
-        {!audioPlaying ? (
+        {!audioPlaying && !startGameClicked ? (
           <button
             className={Styles.musicButton}
             onClick={audioPlaying ? stopMusic : playMusic}
