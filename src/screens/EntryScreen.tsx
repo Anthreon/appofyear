@@ -10,6 +10,8 @@ import {
   newGame,
 } from "../shared/GameLogic";
 
+const cardForeground = require("../assets/images/cardForeground.jpg");
+
 export interface Card {
   id: string;
   cardName: string;
@@ -17,6 +19,8 @@ export interface Card {
   foreverRevealed: boolean;
   img: string;
 }
+
+const gameScreenBackground = require("../assets/images/gameBackground.jpg");
 
 const audio: HTMLAudioElement = new Audio(
   require("../assets/music/BestMusic.mp3")
@@ -57,7 +61,7 @@ function startInterval() {
   );
 }
 
-const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
+const EntryScreen: FC<EntryScreenProps> = () => {
   const [gameArray, setGameArray] = useState<Card[]>([]);
   const [wonGame, setWonGame] = useState<string>("");
   const [audioPlaying, setAudioPlaying] = useState<boolean>(false);
@@ -99,17 +103,16 @@ const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
   }, []);
 
   const normalState = (
-    <div>
+    <div className={Styles.mainContent}>
+      <img className={Styles.gameBackground} src={gameScreenBackground}></img>
       <div className={Styles.wrapper}>
         <button
           className={Styles.musicButton}
           onClick={audioPlaying ? stopMusic : playMusic}
         >
-          Play Game
+          Start Game
         </button>
-        <div>
-          <h1 className={Styles.title}>{title + " " + wonGame} </h1>
-        </div>
+
         <div id={Styles.progressBarWrapper}>
           <div
             style={{ backgroundColor: "green", borderRadius: "8px" }}
@@ -129,12 +132,14 @@ const EntryScreen: FC<EntryScreenProps> = ({ title }) => {
         {gameArray.map((card: Card) => {
           return (
             <GameCard
-              cardBackgroundColor={card.foreverRevealed ? "green" : "brown"}
+              cardBackgroundColor={card.foreverRevealed ? "green" : ""}
               cardPointerEvents={card.foreverRevealed ? "none" : "auto"}
               onCardSelect={selectCard.bind(this, card)}
               key={card.id}
               img={
-                card.currentlyRevealed || card.foreverRevealed ? card.img : null
+                card.currentlyRevealed || card.foreverRevealed
+                  ? card.img
+                  : cardForeground
               }
               cardTitle={
                 card.currentlyRevealed || card.foreverRevealed ? "" : "Pick me"

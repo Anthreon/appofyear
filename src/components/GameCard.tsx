@@ -1,4 +1,3 @@
-import { url } from "inspector";
 import { FC } from "react";
 import Styles from "./GameCard.module.css";
 
@@ -25,11 +24,12 @@ const GameCard: FC<GameCardProps> = ({
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         pointerEvents: cardPointerEvents,
+        backgroundPosition: "center",
       }}
       onClick={onCardSelect}
       className={Styles.cardWrapper}
     >
-      <h2>{cardTitle}</h2>
+      <h2 className={Styles.cardTitle}>{cardTitle}</h2>
     </div>
   );
 };

@@ -1,20 +1,28 @@
-.wrapper {
-  display: flex;
-
-  height: 120px;
+.mainContent {
+  display: grid;
+  overflow: hidden;
   align-items: center;
   justify-content: center;
-  background-color: burlywood;
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
 .gameWrapper {
   display: grid;
   justify-items: center;
   align-items: center;
-  grid-template-columns: repeat(5, auto);
-  grid-template-rows: repeat(5, auto);
-  width: 100%;
-  background-color: aquamarine;
+  grid-template-columns: repeat(5, 200px);
+  grid-template-rows: repeat(4, 200px);
+
+  height: fit-content;
+  border-radius: 8px;
+  z-index: 20;
+  opacity: 1;
 }
 
 .newGameButton {
@@ -38,7 +46,7 @@
   height: 30px;
   border-radius: 8px;
   border: none;
-  background-color: darksalmon;
+  background-color: rgb(136, 208, 50);
   font-weight: 600;
   cursor: pointer;
   left: 25px;
@@ -47,7 +55,7 @@
 }
 
 .musicButton:hover {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 #progressBarWrapper {
@@ -63,4 +71,9 @@
 #progressBarStatus {
   background-color: green;
   border-radius: 8px;
+}
+.gameBackground {
+  position: absolute;
+  top: 0;
+  width: 100%;
 }
