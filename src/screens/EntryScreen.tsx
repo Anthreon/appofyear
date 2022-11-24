@@ -27,7 +27,6 @@ const audio: HTMLAudioElement = new Audio(
 );
 audio.addEventListener("loadeddata", () => {
   let duration = audio.duration;
-
   console.log(duration);
 
   // The duration variable now holds the duration (in seconds) of the audio clip
@@ -37,8 +36,12 @@ let progressBarWidth = 400;
 
 function startInterval() {
   const progressBar = document.getElementById("progressBarStatus");
+  const stopCondition = winningCondition.subscribe((won) => {
+    if (won) {
+      clearInterval(interval);
+    }
+  });
   console.log(progressBar);
-
   const interval = setInterval(
     () => {
       progressBar.style.width = `${progressBarWidth}px`;
@@ -70,12 +73,14 @@ const EntryScreen: FC<EntryScreenProps> = () => {
   const timeExpiredGameOver = () => {
     setTimeout(() => {
       if (!wonGame) {
+        stopMusic();
         setGameOver(true);
       }
     }, 79464);
   };
 
   const playMusic = () => {
+    audio.currentTime = 0;
     audio.play();
     timeExpiredGameOver();
     startInterval();
@@ -87,10 +92,20 @@ const EntryScreen: FC<EntryScreenProps> = () => {
     setAudioPlaying(false);
   };
 
+  const playAgain = () => {
+    progressBarWidth = 400;
+    const progressBar = document.getElementById("progressBarStatus");
+    progressBar.style.backgroundColor = "green";
+    progressBar.style.backgroundImage = "";
+    playMusic();
+    newGame();
+  };
+
   useEffect(() => {
     winningCondition.subscribe((winningValue) => {
       if (winningValue) {
         setWonGame("You Have Won");
+        stopMusic();
       } else {
         setWonGame("");
       }
@@ -106,12 +121,14 @@ const EntryScreen: FC<EntryScreenProps> = () => {
     <div className={Styles.mainContent}>
       <img className={Styles.gameBackground} src={gameScreenBackground}></img>
       <div className={Styles.wrapper}>
-        <button
-          className={Styles.musicButton}
-          onClick={audioPlaying ? stopMusic : playMusic}
-        >
-          Start Game
-        </button>
+        {!audioPlaying ? (
+          <button
+            className={Styles.musicButton}
+            onClick={audioPlaying ? stopMusic : playMusic}
+          >
+            Start Game
+          </button>
+        ) : null}
 
         <div id={Styles.progressBarWrapper}>
           <div
@@ -121,7 +138,7 @@ const EntryScreen: FC<EntryScreenProps> = () => {
         </div>
         {wonGame ? (
           <div>
-            <button onClick={newGame} className={Styles.newGameButton}>
+            <button onClick={playAgain} className={Styles.newGameButton}>
               New Game ?
             </button>
           </div>

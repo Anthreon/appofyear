@@ -209,6 +209,8 @@ const checkWinningCondition = () => {
 
 export const newGame = () => {
   if (winningCondition.value) {
+    const progressBar = document.getElementById("progressBarStatus");
+    progressBar.style.width = `${400}px`;
     winningCondition.next(false);
     const shuffledArray = shuffle(defaultGameState);
     console.log(shuffledArray);
