@@ -5,6 +5,7 @@
   border-radius: 8px;
   line-height: 180px;
   text-align: center;
+  font-family: "Lotr";
 }
 
 .cardWrapper:hover {

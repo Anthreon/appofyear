@@ -42,11 +42,11 @@
 
 .musicButton {
   position: absolute;
-
+  font-family: "Lotr";
   height: 30px;
   border-radius: 8px;
   border: none;
-  background-color: rgb(136, 208, 50);
+  background-color: rgb(226, 235, 215);
   font-weight: 600;
   cursor: pointer;
   left: 25px;

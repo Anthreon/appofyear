@@ -142,7 +142,9 @@ const EntryScreen: FC<EntryScreenProps> = () => {
                   : cardForeground
               }
               cardTitle={
-                card.currentlyRevealed || card.foreverRevealed ? "" : "Pick me"
+                card.currentlyRevealed || card.foreverRevealed
+                  ? ""
+                  : "Reveal me"
               }
             ></GameCard>
           );
