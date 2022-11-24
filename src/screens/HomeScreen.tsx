@@ -24,8 +24,6 @@ const HomeScreen: FC = () => {
     audio.pause();
   };
 
-  const playGame = () => {};
-
   return (
     <div>
       <img
@@ -39,7 +37,7 @@ const HomeScreen: FC = () => {
       <main>
         <div className={Styles.menuWrapper}>
           <Link onClick={stopMusic} className={Styles.startGame} to="/game">
-            <h1>Start Game</h1>
+            <h1>Play Game</h1>
           </Link>
         </div>
 
