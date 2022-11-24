@@ -10,6 +10,11 @@ import {
   newGame,
 } from "../shared/GameLogic";
 
+window.addEventListener("popstate", function (e) {
+  audio.pause();
+  progressBarWidth = 400;
+});
+
 const cardForeground = require("../assets/images/cardForeground.jpg");
 
 export interface Card {
