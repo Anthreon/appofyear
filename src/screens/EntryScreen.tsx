@@ -156,7 +156,9 @@ const EntryScreen: FC<EntryScreenProps> = () => {
           return (
             <GameCard
               cardBackgroundColor={card.foreverRevealed ? "green" : ""}
-              cardPointerEvents={card.foreverRevealed ? "none" : "auto"}
+              cardPointerEvents={
+                card.foreverRevealed || !audioPlaying ? "none" : "auto"
+              }
               onCardSelect={selectCard.bind(this, card)}
               key={card.id}
               img={
