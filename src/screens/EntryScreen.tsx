@@ -10,6 +10,7 @@ import {
   newGame,
 } from "../shared/GameLogic";
 import { motion } from "framer-motion";
+const backgroundBalrog = require("../assets/video/Background.mp4");
 
 window.addEventListener("popstate", function (e) {
   audio.pause();
@@ -130,63 +131,72 @@ const EntryScreen: FC<EntryScreenProps> = () => {
   }, []);
 
   const normalState = (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className={Styles.mainContent}
-    >
-      <img className={Styles.gameBackground} src={gameScreenBackground}></img>
-      <div className={Styles.wrapper}>
-        {!audioPlaying && !startGameClicked ? (
-          <button
-            className={Styles.musicButton}
-            onClick={audioPlaying ? stopMusic : playMusic}
-          >
-            Start Game
-          </button>
-        ) : null}
-
-        <div id={Styles.progressBarWrapper}>
-          <div
-            style={{ backgroundColor: "green", borderRadius: "8px" }}
-            id="progressBarStatus"
-          ></div>
-        </div>
-        {wonGame ? (
-          <div>
-            <button onClick={playAgain} className={Styles.newGameButton}>
-              New Game ?
+    <div>
+      <video
+        className={Styles.video}
+        src={backgroundBalrog}
+        autoPlay
+        loop
+        muted
+      />
+      <motion.div
+        initial={{ width: 0, perspective: 1 }}
+        animate={{ width: "100%", transition: { duration: 2 } }}
+        exit={{ opacity: 1, transition: { duration: 0.3 } }}
+        className={Styles.mainContent}
+      >
+        <img className={Styles.gameBackground} src={gameScreenBackground}></img>
+        <div className={Styles.wrapper}>
+          {!audioPlaying && !startGameClicked ? (
+            <button
+              className={Styles.musicButton}
+              onClick={audioPlaying ? stopMusic : playMusic}
+            >
+              Start Game
             </button>
-          </div>
-        ) : null}
-      </div>
+          ) : null}
 
-      <main className={Styles.gameWrapper}>
-        {gameArray.map((card: Card) => {
-          return (
-            <GameCard
-              cardBackgroundColor={card.foreverRevealed ? "green" : ""}
-              cardPointerEvents={
-                card.foreverRevealed || !audioPlaying ? "none" : "auto"
-              }
-              onCardSelect={selectCard.bind(this, card)}
-              key={card.id}
-              img={
-                card.currentlyRevealed || card.foreverRevealed
-                  ? card.img
-                  : cardForeground
-              }
-              cardTitle={
-                card.currentlyRevealed || card.foreverRevealed
-                  ? ""
-                  : "Reveal me"
-              }
-            ></GameCard>
-          );
-        })}
-      </main>
-    </motion.div>
+          <div id={Styles.progressBarWrapper}>
+            <div
+              style={{ backgroundColor: "green", borderRadius: "8px" }}
+              id="progressBarStatus"
+            ></div>
+          </div>
+          {wonGame ? (
+            <div>
+              <button onClick={playAgain} className={Styles.newGameButton}>
+                New Game ?
+              </button>
+            </div>
+          ) : null}
+        </div>
+
+        <main className={Styles.gameWrapper}>
+          {gameArray.map((card: Card) => {
+            return (
+              <GameCard
+                cardBackgroundColor={card.foreverRevealed ? "green" : ""}
+                cardPointerEvents={
+                  card.foreverRevealed || !audioPlaying ? "none" : "auto"
+                }
+                onCardSelect={selectCard.bind(this, card)}
+                key={card.id}
+                img={
+                  card.currentlyRevealed || card.foreverRevealed
+                    ? card.img
+                    : cardForeground
+                }
+                cardTitle={
+                  card.currentlyRevealed || card.foreverRevealed
+                    ? ""
+                    : "Reveal me"
+                }
+              ></GameCard>
+            );
+          })}
+        </main>
+      </motion.div>
+    </div>
   );
 
   return (
