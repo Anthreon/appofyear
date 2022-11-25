@@ -19,7 +19,7 @@ const GameCard: FC<GameCardProps> = ({
   return (
     <motion.div
       whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.8, rotate: 360 }}
+      whileTap={{ rotate: 360 }}
       style={{
         backgroundColor: cardBackgroundColor,
         backgroundImage: `url(${img})`,
