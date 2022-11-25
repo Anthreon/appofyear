@@ -9,6 +9,7 @@ import {
   winningCondition,
   newGame,
 } from "../shared/GameLogic";
+import { motion } from "framer-motion";
 
 window.addEventListener("popstate", function (e) {
   audio.pause();
@@ -129,7 +130,12 @@ const EntryScreen: FC<EntryScreenProps> = () => {
   }, []);
 
   const normalState = (
-    <div className={Styles.mainContent}>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className={Styles.mainContent}
+    >
       <img className={Styles.gameBackground} src={gameScreenBackground}></img>
       <div className={Styles.wrapper}>
         {!audioPlaying && !startGameClicked ? (
@@ -180,7 +186,7 @@ const EntryScreen: FC<EntryScreenProps> = () => {
           );
         })}
       </main>
-    </div>
+    </motion.div>
   );
 
   return (

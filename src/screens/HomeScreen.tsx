@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import Styles from "./HomeScreen.module.css";
 import { Link } from "react-router-dom";
 import "../assets/fonts/newFont.TTF";
+import { motion } from "framer-motion";
 const background = require("../assets/video/Background.mp4");
 const audio: HTMLAudioElement = new Audio(
   require("../assets/music/BackgroundMusic.mp4")
@@ -25,7 +26,11 @@ const HomeScreen: FC = () => {
   };
 
   return (
-    <div>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <img
         onClick={musicPlaying ? stopMusic : playMusic}
         src={soundIcon}
@@ -51,7 +56,7 @@ const HomeScreen: FC = () => {
           />
         </div>
       </main>
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,18 +1,11 @@
 import "./App.css";
-import EntryScreen from "./screens/EntryScreen";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HomeScreen from "./screens/HomeScreen";
+import { BrowserRouter as Router } from "react-router-dom";
+import AnimatedRouting from "./components/AnimatedRouting";
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<HomeScreen></HomeScreen>}></Route>
-        <Route
-          path="/game"
-          element={<EntryScreen title="Game of Year"></EntryScreen>}
-        ></Route>
-      </Routes>
+      <AnimatedRouting></AnimatedRouting>
     </Router>
   );
 }
