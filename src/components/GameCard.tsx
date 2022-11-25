@@ -1,6 +1,6 @@
 import { FC } from "react";
 import Styles from "./GameCard.module.css";
-
+import { motion } from "framer-motion";
 interface GameCardProps {
   onCardSelect: () => void;
   cardBackgroundColor: string;
@@ -17,7 +17,9 @@ const GameCard: FC<GameCardProps> = ({
   img,
 }) => {
   return (
-    <div
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.8, rotate: 360 }}
       style={{
         backgroundColor: cardBackgroundColor,
         backgroundImage: `url(${img})`,
@@ -30,7 +32,7 @@ const GameCard: FC<GameCardProps> = ({
       className={Styles.cardWrapper}
     >
       <h2 className={Styles.cardTitle}>{cardTitle}</h2>
-    </div>
+    </motion.div>
   );
 };
 
