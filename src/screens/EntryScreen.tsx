@@ -142,7 +142,7 @@ const EntryScreen: FC<EntryScreenProps> = () => {
       <motion.div
         initial={{ width: 0, perspective: 1 }}
         animate={{ width: "100%", transition: { duration: 2 } }}
-        exit={{ opacity: 1, transition: { duration: 0.3 } }}
+        exit={{ width: "0%", transition: { duration: 2 } }}
         className={Styles.mainContent}
       >
         <img className={Styles.gameBackground} src={gameScreenBackground}></img>
